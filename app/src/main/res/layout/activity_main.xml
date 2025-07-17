@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".MainActivity">
+
+    <!-- Timer Display -->
+    <TextView
+        android:id="@+id/timerTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="00:00:00"
+        android:textSize="@dimen/timer_text_size"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:fontFamily="monospace"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <!-- Button Container -->
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="733dp"
+        android:layout_height="131dp"
+        android:background="@color/black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Start Button -->
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="84dp"
+            android:layout_height="108dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/black"
+            android:drawableTop="@drawable/ic_play_arrow_black_24dp"
+            android:padding="16dp"
+            android:text="Start"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <!-- Pause Button -->
+        <Button
+            android:id="@+id/pauseButton"
+            android:layout_width="66dp"
+            android:layout_height="99dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/black"
+            android:drawableTop="@drawable/ic_pause_black_24dp"
+            android:enabled="false"
+            android:padding="16dp"
+            android:text="Pause"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <!-- Reset Button -->
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="71dp"
+            android:layout_height="103dp"
+            android:backgroundTint="@color/black"
+            android:drawableTop="@drawable/ic_stop_black_24dp"
+            android:enabled="false"
+            android:padding="16dp"
+            android:text="Reset"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

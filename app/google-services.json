@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031595346859",
+    "project_id": "studystopwatch-c958b",
+    "storage_bucket": "studystopwatch-c958b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031595346859:android:cb94b6b8c99804ee0e60ee",
+        "android_client_info": {
+          "package_name": "com.example.simplestopwatch"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpgBHaOLQjPzc-_bArb8r39Grwo5M9Wj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
