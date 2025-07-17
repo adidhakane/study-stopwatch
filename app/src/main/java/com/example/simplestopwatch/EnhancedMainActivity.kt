@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
@@ -40,6 +41,11 @@ class EnhancedMainActivity : AppCompatActivity() {
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var addCategoryButton: Button
     private lateinit var activitySelectionCard: CardView
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+
+    // Fragment management
+    private var timerContentView: View? = null
+    private var currentFragment: Fragment? = null
 
     // Adapters
     private lateinit var categoryAdapter: CategoryAdapter
@@ -73,6 +79,7 @@ class EnhancedMainActivity : AppCompatActivity() {
     }
 
     private fun initializeViews() {
+        toolbar = findViewById(R.id.toolbar)
         timerTextView = findViewById(R.id.timerTextView)
         startButton = findViewById(R.id.startButton)
         pauseButton = findViewById(R.id.pauseButton)
@@ -124,27 +131,23 @@ class EnhancedMainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_timer -> {
-                    // Already on timer screen
+                    showTimerView()
                     true
                 }
                 R.id.nav_statistics -> {
-                    // TODO: Navigate to statistics
-                    Toast.makeText(this, "Statistics coming soon!", Toast.LENGTH_SHORT).show()
+                    showStatisticsFragment()
                     true
                 }
                 R.id.nav_schedule -> {
-                    // TODO: Navigate to schedule
-                    Toast.makeText(this, "Schedule coming soon!", Toast.LENGTH_SHORT).show()
+                    showScheduleFragment()
                     true
                 }
                 R.id.nav_goals -> {
-                    // TODO: Navigate to goals
-                    Toast.makeText(this, "Goals coming soon!", Toast.LENGTH_SHORT).show()
+                    showGoalsFragment()
                     true
                 }
                 R.id.nav_settings -> {
-                    // TODO: Navigate to settings
-                    Toast.makeText(this, "Settings coming soon!", Toast.LENGTH_SHORT).show()
+                    showSettingsFragment()
                     true
                 }
                 else -> false
@@ -323,5 +326,90 @@ class EnhancedMainActivity : AppCompatActivity() {
             
             dailyStatsRef.setValue(updatedStats)
         }
+    }
+    
+    private fun showTimerView() {
+        // Clear any fragments from the container
+        currentFragment?.let {
+            supportFragmentManager.beginTransaction()
+                .remove(it)
+                .commit()
+        }
+        currentFragment = null
+        
+        // Show timer content and hide fragment container
+        findViewById<View>(R.id.timerContent)?.visibility = View.VISIBLE
+        findViewById<View>(R.id.fragmentContainer)?.visibility = View.GONE
+        
+        // Update toolbar title
+        toolbar.title = "Activity Timer"
+    }
+    
+    private fun showStatisticsFragment() {
+        // Hide timer content and show fragment container
+        findViewById<View>(R.id.timerContent)?.visibility = View.GONE
+        findViewById<View>(R.id.fragmentContainer)?.visibility = View.VISIBLE
+        
+        // Replace any existing fragment with statistics fragment
+        val statsFragment = StatisticsFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, statsFragment, "STATISTICS")
+            .commit()
+        
+        currentFragment = statsFragment
+        
+        // Update toolbar title
+        toolbar.title = "Statistics"
+    }
+    
+    private fun showScheduleFragment() {
+        // Hide timer content and show fragment container
+        findViewById<View>(R.id.timerContent)?.visibility = View.GONE
+        findViewById<View>(R.id.fragmentContainer)?.visibility = View.VISIBLE
+        
+        // Replace any existing fragment with schedule fragment
+        val scheduleFragment = ScheduleFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, scheduleFragment, "SCHEDULE")
+            .commit()
+        
+        currentFragment = scheduleFragment
+        
+        // Update toolbar title
+        toolbar.title = "Schedule Management"
+    }
+    
+    private fun showGoalsFragment() {
+        // Hide timer content and show fragment container
+        findViewById<View>(R.id.timerContent)?.visibility = View.GONE
+        findViewById<View>(R.id.fragmentContainer)?.visibility = View.VISIBLE
+        
+        // Replace any existing fragment with goals fragment
+        val goalsFragment = GoalsFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, goalsFragment, "GOALS")
+            .commit()
+        
+        currentFragment = goalsFragment
+        
+        // Update toolbar title
+        toolbar.title = "Goals & Progress"
+    }
+    
+    private fun showSettingsFragment() {
+        // Hide timer content and show fragment container
+        findViewById<View>(R.id.timerContent)?.visibility = View.GONE
+        findViewById<View>(R.id.fragmentContainer)?.visibility = View.VISIBLE
+        
+        // Replace any existing fragment with settings fragment
+        val settingsFragment = SettingsFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, settingsFragment, "SETTINGS")
+            .commit()
+        
+        currentFragment = settingsFragment
+        
+        // Update toolbar title
+        toolbar.title = "Settings"
     }
 }
